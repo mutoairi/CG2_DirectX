@@ -10,17 +10,6 @@
 
 
 
-struct MaterialData
-{
-	std::string texturFilePath;
-	uint32_t textureIndex=0;
-};
-struct ModelData
-{
-	std::vector<VertexData> vertices;
-	MaterialData material;
-};
-
 class Object3dCommon;
 class Object3d
 {

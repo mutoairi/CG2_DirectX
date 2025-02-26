@@ -20,6 +20,8 @@
 #include"Sprite.h"
 #include"Object3dCommon.h"
 #include"Object3d.h"
+#include"ModelCommon.h"
+#include"Model.h"
 #include"TextureManager.h"
 #include"StringUtility.h"
 #include"Logger.h"
@@ -151,10 +153,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		sprites.push_back(sprite);
 	}
 
+	//
+
 
 	//Modelを生成
+	/*モデルコモン*/
+	ModelCommon* modelCommon = nullptr;
+	modelCommon = new ModelCommon();
+	modelCommon->Initialize(dxcCommon);
+	/*モデル|見た目*/
+	Model* model = nullptr;
+	model = new Model();
+	model->Initialize(modelCommon);
 	Object3d* object3d = nullptr;
+	/*Object3d|位置*/
 	object3d = new Object3d();
+	object3d->SetModel(model);
 	object3d->Initialize(objectCommon);
 
 
@@ -299,6 +313,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete dxcCommon;
 	delete spriteCommon;
 	delete objectCommon;
+	delete modelCommon;
+	delete model;
 	delete object3d;
 	for (Sprite* sprite : sprites) {
 		delete sprite;
