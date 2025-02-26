@@ -1,10 +1,10 @@
 #include "Model.h"
 #include"TextureManager.h"
 
-void Model::Initialize(ModelCommon* modelCommon)
+void Model::Initialize(ModelCommon* modelCommon, const std::string& directoryPath, const std::string& filename)
 {
 	modelCommon_ = modelCommon;
-	modelData = LoadObjFile("resources", "plane.obj");
+	modelData = LoadObjFile(directoryPath,filename );
 	Vertex();
 	MaterialInitialize();
 	//.objの参照しているテクスチャの読み込み

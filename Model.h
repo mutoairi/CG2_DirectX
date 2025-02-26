@@ -24,7 +24,7 @@ struct ModelData
 class Model
 {
 public:
-	void Initialize(ModelCommon* modelCommon);
+	void Initialize(ModelCommon* modelCommon, const std::string& directoryPath, const std::string& filename);
 	void Draw();
 
 	//.mtlファイルの読み取り
