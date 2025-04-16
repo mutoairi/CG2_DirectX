@@ -23,6 +23,7 @@
 #include"ModelCommon.h"
 #include"Model.h"
 #include"TextureManager.h"
+#include"ModelManager.h"
 #include"StringUtility.h"
 #include"Logger.h"
 
@@ -103,44 +104,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	TextureManager::GetInstance()->LoadTexture("resources/uvChecker.png");
 	//TextureManager::GetInstance()->LoadTexture("resources/monsterBall.png");
 
-	////const uint32_t kSubdivision = 16;
-	//ModelData modelData = LoadObjFile("resources", "plane.obj");
-	//Microsoft::WRL::ComPtr < ID3D12Resource> vertexResource = dxcCommon->CreateBufferResource(sizeof(VertexData) * modelData.vertices.size());
-	//Microsoft::WRL::ComPtr < ID3D12Resource> materialResource = dxcCommon->CreateBufferResource(sizeof(Material));
-	////	マテリアルにデータを書き込む
-	//Material* materialData = nullptr;
-	////書き込むためのアドレスを取得
-	//materialResource->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
-	////今回は赤を書き込んでみる
-	//materialData->color = { Vector4(1.0f, 1.0f, 1.0f, 1.0f) };
-	//materialData->enableLighting = true;
-	//materialData->uvTransform = MakeIdentity4x4();
-	////wvp用のリソースを作る
-	//Microsoft::WRL::ComPtr < ID3D12Resource> wvpResource = dxcCommon->CreateBufferResource(sizeof(TransformationMatrix));
-	////データを書き込む
-	//TransformationMatrix* wvpData = nullptr;
-	////Matrix4x4* transformationMatrixData = nullptr;
-	////書き込むためのアドレスを取得
-	//wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&wvpData));
-	////単位行列を書き込んでおく
-	//wvpData->WVP = MakeIdentity4x4();
-	//wvpData->World = MakeIdentity4x4();
-	////*transformationMatrixData = MakeIdentity4x4();
-	////頂点バッファビューを作成する
-	//D3D12_VERTEX_BUFFER_VIEW vertexBufferView{};
-	////リソースの先頭のアドレスから使う
-	//vertexBufferView.BufferLocation = vertexResource->GetGPUVirtualAddress();
-	////使用するリソースのサイズは頂点3つ文のサイズ
-	//vertexBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData.vertices.size());
-
-	////1頂点当たりのサイズ
-	//vertexBufferView.StrideInBytes = sizeof(VertexData);
-
-	////頂点リソースにデータを書き込む
-	//VertexData* vertexData = nullptr;
-	////書き込むためのアドレスを取得
-	//vertexResource->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-	//std::memcpy(vertexData, modelData.vertices.data(), sizeof(VertexData) * modelData.vertices.size());
+	//3Dマネージャーの初期化
+	ModelManager::GetInstance()->Initialize(dxcCommon);
 
 
 	//Spriteを作成
@@ -308,6 +273,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//CloseHandle(fenceEvent);
 
 	TextureManager::GetInstance()->Finalize();
+	ModelManager::GetInstance()->Finalize();
 	//入力解放
 	delete input;
 	delete dxcCommon;
